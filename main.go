@@ -1,16 +1,17 @@
 package main
 
 import (
-	"go-trading/database"
-	"go-trading/models"
-	"go-trading/routers"
+	"go-trading/httpd/routers"
+	"go-trading/services/database"
+	"go-trading/services/database/migrations"
+	"go-trading/services/redis"
 )
 
 func main() {
-	db := database.Connection()
-	db.AutoMigrate(&models.User{})
-	defer db.Close()
+	database.Setup()
+	migrations.Setup()
+	redis.Setup()
+	routers.Setup()
 
-	server := routers.Setup(db)
-	_ = server.Run()
+	defer database.Close()
 }
