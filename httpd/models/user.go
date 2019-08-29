@@ -1,10 +1,11 @@
 package models
 
 import (
-	"go-trading/httpd/responses"
-	"go-trading/httpd/utils"
-	"go-trading/services/database"
 	"time"
+
+	"github.com/yangliulnn/gin-starter/httpd/responses"
+	"github.com/yangliulnn/gin-starter/httpd/utils"
+	"github.com/yangliulnn/gin-starter/services/database"
 )
 
 type User struct {

@@ -2,11 +2,12 @@ package database
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"go-trading/configs"
-	"log"
+	"github.com/yangliulnn/gin-starter/configs"
 )
 
 var DB *gorm.DB

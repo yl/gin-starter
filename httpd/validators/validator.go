@@ -1,16 +1,17 @@
 package validators
 
 import (
+	"reflect"
+	"sync"
+
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
 	"github.com/go-playground/locales/zh"
 	"github.com/go-playground/locales/zh_Hant_TW"
 	"github.com/go-playground/universal-translator"
-	"go-trading/httpd/validators/lang"
-	zhLang "go-trading/httpd/validators/lang/zh"
 	"gopkg.in/go-playground/validator.v9"
-	"reflect"
-	"sync"
+	"github.com/yangliulnn/gin-starter/httpd/validators/lang"
+	zhLang "github.com/yangliulnn/gin-starter/httpd/validators/lang/zh"
 )
 
 type DefaultValidator struct {

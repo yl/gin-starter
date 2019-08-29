@@ -1,8 +1,9 @@
 package utils
 
 import (
-	"go-trading/configs"
 	"time"
+
+	"github.com/yangliulnn/gin-starter/configs"
 )
 
 type Time struct{}

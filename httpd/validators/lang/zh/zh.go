@@ -1,7 +1,7 @@
 package zh
 
 import (
-	"go-trading/httpd/validators/lang"
+	"github.com/yangliulnn/gin-starter/httpd/validators/lang"
 )
 
 var fields = lang.Fields{

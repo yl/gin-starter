@@ -1,9 +1,10 @@
 package utils
 
 import (
-	"github.com/google/uuid"
-	"go-trading/services/redis"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/yangliulnn/gin-starter/services/redis"
 )
 
 type Token struct{}

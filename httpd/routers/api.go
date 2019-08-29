@@ -3,9 +3,9 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"go-trading/configs"
-	"go-trading/httpd/controllers/v1"
-	"go-trading/httpd/validators"
+	"github.com/yangliulnn/gin-starter/configs"
+	"github.com/yangliulnn/gin-starter/httpd/controllers/v1"
+	"github.com/yangliulnn/gin-starter/httpd/validators"
 )
 
 func Setup() *gin.Engine {

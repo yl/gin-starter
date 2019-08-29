@@ -6,10 +6,10 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"go-trading/httpd/models"
-	"go-trading/httpd/responses"
-	"go-trading/httpd/utils/paginate"
-	"go-trading/services/database"
+	"github.com/yangliulnn/gin-starter/httpd/models"
+	"github.com/yangliulnn/gin-starter/httpd/responses"
+	"github.com/yangliulnn/gin-starter/httpd/utils/paginate"
+	"github.com/yangliulnn/gin-starter/services/database"
 )
 
 type UserController struct{}

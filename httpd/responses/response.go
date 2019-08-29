@@ -1,13 +1,12 @@
 package responses
 
 import (
-	"github.com/gin-gonic/gin"
-	"go-trading/httpd/utils/paginate"
-	"go-trading/httpd/validators"
-	"gopkg.in/go-playground/validator.v9"
-	//en_translations "gopkg.in/go-playground/validator.v9/translations/en"
-	//zh_tw_translations "gopkg.in/go-playground/validator.v9/translations/zh_tw"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"gopkg.in/go-playground/validator.v9"
+	"github.com/yangliulnn/gin-starter/httpd/utils/paginate"
+	"github.com/yangliulnn/gin-starter/httpd/validators"
 )
 
 type Item *map[string]interface{}

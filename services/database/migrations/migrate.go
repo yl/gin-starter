@@ -1,8 +1,8 @@
 package migrations
 
 import (
-	"go-trading/httpd/models"
-	"go-trading/services/database"
+	"github.com/yangliulnn/gin-starter/httpd/models"
+	"github.com/yangliulnn/gin-starter/services/database"
 )
 
 func Setup() {

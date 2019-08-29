@@ -1,11 +1,11 @@
 package main
 
 import (
-	"go-trading/configs"
-	"go-trading/httpd/routers"
-	"go-trading/services/database"
-	"go-trading/services/database/migrations"
-	"go-trading/services/redis"
+	"github.com/yangliulnn/gin-starter/configs"
+	"github.com/yangliulnn/gin-starter/httpd/routers"
+	"github.com/yangliulnn/gin-starter/services/database"
+	"github.com/yangliulnn/gin-starter/services/database/migrations"
+	"github.com/yangliulnn/gin-starter/services/redis"
 )
 
 func main() {

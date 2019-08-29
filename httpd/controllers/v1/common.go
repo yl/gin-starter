@@ -1,9 +1,10 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type CommonController struct{}

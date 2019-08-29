@@ -2,9 +2,10 @@ package redis
 
 import (
 	"fmt"
-	"github.com/go-redis/redis"
-	"go-trading/configs"
 	"log"
+
+	"github.com/go-redis/redis"
+	"github.com/yangliulnn/gin-starter/configs"
 )
 
 var Redis *redis.Client

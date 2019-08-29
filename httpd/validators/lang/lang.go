@@ -1,9 +1,10 @@
 package lang
 
 import (
-	ut "github.com/go-playground/universal-translator"
-	"gopkg.in/go-playground/validator.v9"
 	"log"
+
+	"github.com/go-playground/universal-translator"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 type Fields map[string]string

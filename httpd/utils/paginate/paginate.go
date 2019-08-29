@@ -1,10 +1,11 @@
 package paginate
 
 import (
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"go-trading/configs"
-	"strconv"
+	"github.com/yangliulnn/gin-starter/configs"
 )
 
 type Pagination struct {

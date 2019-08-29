@@ -1,4 +1,4 @@
-module go-trading
+module github.com/yangliulnn/gin-starter
 
 go 1.12
 

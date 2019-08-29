@@ -1,15 +1,16 @@
 package v1
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
-	"go-trading/httpd/models"
-	"go-trading/httpd/requests"
-	"go-trading/httpd/responses"
-	"go-trading/httpd/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
+	"github.com/yangliulnn/gin-starter/httpd/models"
+	"github.com/yangliulnn/gin-starter/httpd/requests"
+	"github.com/yangliulnn/gin-starter/httpd/responses"
+	"github.com/yangliulnn/gin-starter/httpd/utils"
 )
 
 type AuthController struct{}
