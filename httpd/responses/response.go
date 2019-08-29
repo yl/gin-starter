@@ -2,6 +2,7 @@ package responses
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-trading/httpd/utils/paginate"
 	"go-trading/httpd/validators"
 	"gopkg.in/go-playground/validator.v9"
 	//en_translations "gopkg.in/go-playground/validator.v9/translations/en"
@@ -27,6 +28,13 @@ type collectionResponse struct {
 
 type Response struct{}
 
+type paginateResponse struct {
+	Code    int                  `json:"code"`
+	Message string               `json:"message"`
+	Data    Collection           `json:"data"`
+	Meta    *paginate.Pagination `json:"meta"`
+}
+
 func NewResponse() *Response {
 	return &Response{}
 }
@@ -44,6 +52,15 @@ func (r *Response) Collection(context *gin.Context, collection Collection) {
 		Code:    http.StatusOK,
 		Message: http.StatusText(http.StatusOK),
 		Data:    collection,
+	})
+}
+
+func (r *Response) Paginate(context *gin.Context, collection Collection, paginate *paginate.Pagination) {
+	context.JSON(http.StatusOK, &paginateResponse{
+		Code:    http.StatusOK,
+		Message: http.StatusText(http.StatusOK),
+		Data:    collection,
+		Meta:    paginate,
 	})
 }
 
@@ -70,7 +87,7 @@ func (r *Response) NotFound(context *gin.Context) {
 //UnprocessableEntity 422
 func (r *Response) UnprocessableEntity(context *gin.Context, err error) {
 	errs := err.(validator.ValidationErrors)
-	trans,_:= validators.UT.GetTranslator("zh")
+	trans, _ := validators.UT.GetTranslator("zh")
 	for _, e := range errs.Translate(trans) {
 		r.Error(context, http.StatusUnprocessableEntity, e)
 		return

@@ -5,11 +5,12 @@ import (
 	"log"
 )
 
-var App *app
-
-var Database *database
-
-var Redis *redis
+var (
+	App      *app
+	Database *database
+	Redis    *redis
+	Paginate *paginate
+)
 
 type app struct {
 	Mode       string `ini:"mode"`
@@ -35,6 +36,12 @@ type redis struct {
 	DB       int    `ini:"db"`
 }
 
+type paginate struct {
+	PageField      string `ini:"page_field"`
+	PerPageField   string `ini:"per_page_field"`
+	DefaultPerPage int    `ini:"default_per_page"`
+}
+
 func init() {
 	cfg, err := ini.Load("./configs/debug.ini")
 	if err != nil {
@@ -55,6 +62,12 @@ func init() {
 
 	Redis = &redis{}
 	err = cfg.Section("redis").MapTo(Redis)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	Paginate = &paginate{}
+	err = cfg.Section("paginate").MapTo(Paginate)
 	if err != nil {
 		log.Fatalln(err)
 	}

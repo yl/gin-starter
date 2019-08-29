@@ -1,32 +1,28 @@
 package v1
 
 import (
+	"log"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"go-trading/httpd/models"
 	"go-trading/httpd/responses"
-	"log"
-	"strconv"
+	"go-trading/httpd/utils/paginate"
+	"go-trading/services/database"
 )
 
 type UserController struct{}
 
 func (c *UserController) List(context *gin.Context) {
+	user := &models.User{}
+	users := &models.Users{}
+
+	query := database.DB.Model(user).Order("id DESC")
+	pagination := paginate.Paginator(context, query, users)
+
 	response := responses.NewResponse()
-
-	userModel := &models.User{}
-	users, err := userModel.All()
-	if gorm.IsRecordNotFoundError(err) {
-		response.NotFound(context)
-		return
-	}
-	if err != nil {
-		log.Println(err)
-		response.InternalServerError(context)
-		return
-	}
-
-	response.Collection(context, users.Transformer())
+	response.Paginate(context, users.Transformer(), pagination)
 	return
 }
 
