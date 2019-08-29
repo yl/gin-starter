@@ -31,11 +31,7 @@ func Paginator(context *gin.Context, query *gorm.DB, data interface{}) *Paginati
 }
 
 func getPage(context *gin.Context) int {
-	s, ok := context.GetQuery(configs.Paginate.PageField)
-	if !ok {
-		return 1
-	}
-	page, err := strconv.Atoi(s)
+	page, err := strconv.Atoi(context.Query(configs.Paginate.PageField))
 	if err != nil || page == 0 {
 		return 1
 	}
@@ -43,11 +39,7 @@ func getPage(context *gin.Context) int {
 }
 
 func getPerPage(context *gin.Context) int {
-	s, ok := context.GetQuery(configs.Paginate.PerPageField)
-	if !ok {
-		return configs.Paginate.DefaultPerPage
-	}
-	perPage, err := strconv.Atoi(s)
+	perPage, err := strconv.Atoi(context.Query(configs.Paginate.PerPageField))
 	if err != nil || perPage == 0 {
 		return configs.Paginate.DefaultPerPage
 	}
