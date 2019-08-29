@@ -1,6 +1,7 @@
 package main
 
 import (
+	"go-trading/configs"
 	"go-trading/httpd/routers"
 	"go-trading/services/database"
 	"go-trading/services/database/migrations"
@@ -9,9 +10,10 @@ import (
 
 func main() {
 	database.Setup()
+	defer database.Close()
 	migrations.Setup()
 	redis.Setup()
-	routers.Setup()
 
-	defer database.Close()
+	router := routers.Setup()
+	_ = router.Run(configs.App.Addr)
 }

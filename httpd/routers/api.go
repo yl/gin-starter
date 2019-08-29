@@ -8,7 +8,7 @@ import (
 	"go-trading/httpd/validators"
 )
 
-func Setup() {
+func Setup() *gin.Engine {
 	gin.SetMode(configs.App.Mode)
 
 	router := gin.New()
@@ -38,5 +38,5 @@ func Setup() {
 		}
 	}
 
-	_ = router.Run(configs.App.Addr)
+	return router
 }
