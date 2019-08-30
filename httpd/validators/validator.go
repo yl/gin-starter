@@ -9,9 +9,9 @@ import (
 	"github.com/go-playground/locales/zh"
 	"github.com/go-playground/locales/zh_Hant_TW"
 	"github.com/go-playground/universal-translator"
-	"gopkg.in/go-playground/validator.v9"
 	"github.com/yangliulnn/gin-starter/httpd/validators/lang"
 	zhLang "github.com/yangliulnn/gin-starter/httpd/validators/lang/zh"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 type DefaultValidator struct {

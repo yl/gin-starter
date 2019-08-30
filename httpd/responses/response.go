@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"gopkg.in/go-playground/validator.v9"
 	"github.com/yangliulnn/gin-starter/httpd/utils/paginate"
 	"github.com/yangliulnn/gin-starter/httpd/validators"
+	"gopkg.in/go-playground/validator.v9"
 )
 
 type Item *map[string]interface{}

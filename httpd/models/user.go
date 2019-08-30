@@ -9,7 +9,7 @@ import (
 )
 
 type User struct {
-	ID        int   `gorm:"primary_key"`
+	ID        int    `gorm:"primary_key"`
 	Mobile    string `gorm:"unique_index"`
 	Password  string
 	CreatedAt time.Time
