@@ -85,8 +85,9 @@ func (r *Response) NotFound(context *gin.Context) {
 
 //UnprocessableEntity 422
 func (r *Response) UnprocessableEntity(context *gin.Context, err error) {
+	lang := context.GetHeader("Accept-Language")
+	trans, _ := validators.UT.GetTranslator(lang)
 	errs := err.(validator.ValidationErrors)
-	trans, _ := validators.UT.GetTranslator("zh")
 	for _, e := range errs.Translate(trans) {
 		r.Error(context, http.StatusUnprocessableEntity, e)
 		return

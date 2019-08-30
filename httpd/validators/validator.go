@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
 	"github.com/go-playground/locales/zh"
-	"github.com/go-playground/locales/zh_Hant_TW"
 	"github.com/go-playground/universal-translator"
 	"github.com/yangliulnn/gin-starter/httpd/validators/lang"
+	enLang "github.com/yangliulnn/gin-starter/httpd/validators/lang/en"
 	zhLang "github.com/yangliulnn/gin-starter/httpd/validators/lang/zh"
 	"gopkg.in/go-playground/validator.v9"
 )
@@ -52,9 +52,11 @@ func (v *DefaultValidator) lazyInit() {
 		// add any custom validators etc. here
 		//_ = v.Validate.RegisterValidation("unique", Unique)
 
-		UT = ut.New(en.New(), zh.New(), zh_Hant_TW.New())
+		UT = ut.New(zh.New(), en.New())
 		zhTrans, _ := UT.GetTranslator("zh")
+		enTrans, _ := UT.GetTranslator("en")
 		lang.RegisterTranslation(Validator, zhTrans, zhLang.Lang)
+		lang.RegisterTranslation(Validator, enTrans, enLang.Lang)
 	})
 }
 
