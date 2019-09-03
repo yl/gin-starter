@@ -7,14 +7,6 @@ import (
 	"gopkg.in/ini.v1"
 )
 
-var (
-	App      *app
-	Database *database
-	Redis    *redis
-	Paginate *paginate
-	JWT      *jwt
-)
-
 type app struct {
 	Mode       string `ini:"mode"`
 	Addr       string `ini:"addr"`
@@ -47,38 +39,29 @@ type jwt struct {
 	TTL time.Duration `ini:"ttl"`
 }
 
-func init() {
-	cfg, err := ini.Load("./configs/debug.ini")
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	App = &app{}
-	err = cfg.Section("app").MapTo(App)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
+var (
+	App      = &app{}
 	Database = &database{}
-	err = cfg.Section("database").MapTo(Database)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	Redis = &redis{}
-	err = cfg.Section("redis").MapTo(Redis)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
+	Redis    = &redis{}
 	Paginate = &paginate{}
-	err = cfg.Section("paginate").MapTo(Paginate)
+	JWT      = &jwt{}
+)
+
+func init() {
+	config, err := ini.Load("./configs/debug.ini")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	JWT = &jwt{}
-	err = cfg.Section("jwt").MapTo(Paginate)
+	mapTo(config, App, "app")
+	mapTo(config, Database, "database")
+	mapTo(config, Redis, "redis")
+	mapTo(config, Paginate, "paginate")
+	mapTo(config, JWT, "jwt")
+}
+
+func mapTo(cfg *ini.File, p interface{}, section string) {
+	err := cfg.Section(section).MapTo(p)
 	if err != nil {
 		log.Fatalln(err)
 	}
