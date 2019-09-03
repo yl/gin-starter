@@ -40,6 +40,7 @@ type jwt struct {
 }
 
 var (
+	config   *ini.File
 	App      = &app{}
 	Database = &database{}
 	Redis    = &redis{}
@@ -48,20 +49,21 @@ var (
 )
 
 func init() {
-	config, err := ini.Load("./configs/debug.ini")
+	var err error
+	config, err = ini.Load("./configs/debug.ini")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	mapTo(config, App, "app")
-	mapTo(config, Database, "database")
-	mapTo(config, Redis, "redis")
-	mapTo(config, Paginate, "paginate")
-	mapTo(config, JWT, "jwt")
+	mapTo("app", App)
+	mapTo("database", Database)
+	mapTo("redis", Redis)
+	mapTo("paginate", Paginate)
+	mapTo("jwt", JWT)
 }
 
-func mapTo(cfg *ini.File, p interface{}, section string) {
-	err := cfg.Section(section).MapTo(p)
+func mapTo(section string, p interface{}) {
+	err := config.Section(section).MapTo(p)
 	if err != nil {
 		log.Fatalln(err)
 	}
