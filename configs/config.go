@@ -48,7 +48,7 @@ var (
 	JWT      = &jwt{}
 )
 
-func init() {
+func Setup() {
 	var err error
 	config, err = ini.Load("./configs/debug.ini")
 	if err != nil {

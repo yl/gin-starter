@@ -1,9 +1,8 @@
 package lang
 
 import (
-	"log"
-
 	"github.com/go-playground/universal-translator"
+	. "github.com/yangliulnn/gin-starter/httpd/utils/log"
 	"gopkg.in/go-playground/validator.v9"
 )
 
@@ -19,12 +18,12 @@ type Lang struct {
 func transFunc(ut ut.Translator, fe validator.FieldError) string {
 	fld, err := ut.T(fe.Field())
 	if err != nil {
-		log.Printf("警告: 字段翻译错误: %#v", fe)
+		Log.Error("警告: 字段翻译错误: %#v", fe)
 		fld = fe.Field()
 	}
 	t, err := ut.T(fe.Tag(), fld)
 	if err != nil {
-		log.Printf("警告: 验证规则翻译错误: %#v", fe)
+		Log.Error("警告: 验证规则翻译错误: %#v", fe)
 		return fe.(error).Error()
 	}
 	return t

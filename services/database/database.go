@@ -2,12 +2,12 @@ package database
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/yangliulnn/gin-starter/configs"
+	"github.com/yangliulnn/gin-starter/httpd/utils/log"
 )
 
 var DB *gorm.DB
@@ -30,13 +30,13 @@ func Setup() {
 			config.Database,
 		)
 	default:
-		log.Fatalln("不支持的数据库类型")
+		log.Log.Error("不支持的数据库类型")
 	}
 
 	var err error
 	DB, err = gorm.Open(dialect, args)
 	if err != nil {
-		log.Fatalln(err)
+		log.Log.Error(err)
 	}
 }
 

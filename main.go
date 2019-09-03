@@ -10,6 +10,7 @@ import (
 )
 
 func main() {
+	configs.Setup()
 	log.Setup()
 	database.Setup()
 	defer database.Close()

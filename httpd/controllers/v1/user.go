@@ -1,13 +1,13 @@
 package v1
 
 import (
-	"log"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/yangliulnn/gin-starter/httpd/models"
 	"github.com/yangliulnn/gin-starter/httpd/responses"
+	. "github.com/yangliulnn/gin-starter/httpd/utils/log"
 	"github.com/yangliulnn/gin-starter/httpd/utils/paginate"
 	"github.com/yangliulnn/gin-starter/services/database"
 )
@@ -31,7 +31,7 @@ func (c *UserController) Show(context *gin.Context) {
 
 	id, err := strconv.Atoi(context.Param("id"))
 	if err != nil {
-		log.Println(err)
+		Log.Error(err)
 		response.InternalServerError(context)
 		return
 	}
@@ -43,7 +43,7 @@ func (c *UserController) Show(context *gin.Context) {
 		return
 	}
 	if err != nil {
-		log.Println(err)
+		Log.Error(err)
 		response.InternalServerError(context)
 		return
 	}

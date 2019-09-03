@@ -2,10 +2,10 @@ package redis
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/go-redis/redis"
 	"github.com/yangliulnn/gin-starter/configs"
+	"github.com/yangliulnn/gin-starter/httpd/utils/log"
 )
 
 var Redis *redis.Client
@@ -21,6 +21,6 @@ func Setup() {
 
 	_, err := Redis.Ping().Result()
 	if err != nil {
-		log.Fatalln(err)
+		log.Log.Error(err)
 	}
 }
