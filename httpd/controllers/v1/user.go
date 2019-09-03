@@ -36,8 +36,8 @@ func (c *UserController) Show(context *gin.Context) {
 		return
 	}
 
-	userModel := &models.User{}
-	user, err := userModel.FindById(uint(id))
+	user := models.NewUser()
+	err = user.FirstBy("id", id)
 	if gorm.IsRecordNotFoundError(err) {
 		response.NotFound(context)
 		return

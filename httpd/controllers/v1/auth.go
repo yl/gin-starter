@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"github.com/yangliulnn/gin-starter/configs"
+	"github.com/yangliulnn/gin-starter/httpd/utils/jwt"
 	"log"
 	"net/http"
 	"time"
@@ -25,14 +27,17 @@ func (c *AuthController) Register(context *gin.Context) {
 		return
 	}
 
-	userModel := &models.User{}
 	password, err := utils.NewPassword().Hash(request.Password)
 	if err != nil {
 		log.Println(err)
 		response.InternalServerError(context)
 		return
 	}
-	user, err := userModel.Insert(request.Mobile, password)
+	user := models.User{
+		Mobile:   request.Mobile,
+		Password: password,
+	}
+	err = user.Save()
 	if err != nil {
 		log.Println(err)
 		response.InternalServerError(context)
@@ -53,10 +58,8 @@ func (c *AuthController) Login(context *gin.Context) {
 		return
 	}
 
-	userModel := &models.User{}
-	user, err := userModel.FindOne(map[string]interface{}{
-		"mobile": request.Mobile,
-	})
+	user := models.NewUser()
+	err = user.FirstBy("mobile", request.Mobile)
 	if gorm.IsRecordNotFoundError(err) {
 		response.Error(context, http.StatusBadRequest, "账号不存在")
 		return
@@ -73,7 +76,7 @@ func (c *AuthController) Login(context *gin.Context) {
 		return
 	}
 
-	token, err := utils.NewToken().Generate(user.ID)
+	token, err := jwt.Generate(user)
 	if err != nil {
 		log.Println(err)
 		response.InternalServerError(context)
@@ -82,7 +85,7 @@ func (c *AuthController) Login(context *gin.Context) {
 
 	response.Data(context, &gin.H{
 		"token":      token,
-		"expired_at": utils.NewTime().Format(time.Now().Add(24 * time.Hour)),
+		"expired_at": utils.NewTime().Format(time.Now().Add(configs.JWT.TTL * time.Second)),
 	})
 	return
 }

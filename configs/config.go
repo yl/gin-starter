@@ -2,6 +2,7 @@ package configs
 
 import (
 	"log"
+	"time"
 
 	"gopkg.in/ini.v1"
 )
@@ -11,6 +12,7 @@ var (
 	Database *database
 	Redis    *redis
 	Paginate *paginate
+	JWT      *jwt
 )
 
 type app struct {
@@ -38,9 +40,11 @@ type redis struct {
 }
 
 type paginate struct {
-	PageField      string `ini:"page_field"`
-	PerPageField   string `ini:"per_page_field"`
-	DefaultPerPage int    `ini:"default_per_page"`
+	DefaultPerPage int `ini:"default_per_page"`
+}
+
+type jwt struct {
+	TTL time.Duration `ini:"ttl"`
 }
 
 func init() {
@@ -69,6 +73,12 @@ func init() {
 
 	Paginate = &paginate{}
 	err = cfg.Section("paginate").MapTo(Paginate)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	JWT = &jwt{}
+	err = cfg.Section("jwt").MapTo(Paginate)
 	if err != nil {
 		log.Fatalln(err)
 	}

@@ -7,6 +7,6 @@ import (
 
 func Setup() {
 	database.DB.AutoMigrate(
-		&models.User{},
+		models.NewUser(),
 	)
 }

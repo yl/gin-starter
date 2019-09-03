@@ -17,6 +17,10 @@ type User struct {
 	DeletedAt *time.Time `sql:"index"`
 }
 
+func NewUser() *User {
+	return &User{}
+}
+
 type Users []User
 
 func (u *User) Transformer() responses.Item {
@@ -35,26 +39,12 @@ func (us *Users) Transformer() responses.Collection {
 	return collection
 }
 
-func (u *User) Insert(mobile string, password string) (*User, error) {
-	user := &User{Mobile: mobile, Password: password}
-	err := database.DB.Save(user).Error
-	return user, err
+func (u *User) Save() error {
+	err := database.DB.Save(u).Error
+	return err
 }
 
-func (u *User) All() (*Users, error) {
-	users := &Users{}
-	err := database.DB.Find(&users).Error
-	return users, err
-}
-
-func (u *User) FindById(id uint) (*User, error) {
-	user := &User{}
-	err := database.DB.Find(&user, id).Error
-	return user, err
-}
-
-func (u *User) FindOne(condition map[string]interface{}) (*User, error) {
-	user := &User{}
-	err := database.DB.Where(condition).First(user).Error
-	return user, err
+func (u *User) FirstBy(field string, value interface{}) error {
+	err := database.DB.Where(field+" = ?", value).First(u).Error
+	return err
 }
