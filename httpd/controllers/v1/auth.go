@@ -1,18 +1,18 @@
 package v1
 
 import (
-	"github.com/yangliulnn/gin-starter/configs"
-	"github.com/yangliulnn/gin-starter/httpd/utils/jwt"
-	"log"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
+	"github.com/yangliulnn/gin-starter/configs"
 	"github.com/yangliulnn/gin-starter/httpd/models"
 	"github.com/yangliulnn/gin-starter/httpd/requests"
 	"github.com/yangliulnn/gin-starter/httpd/responses"
 	"github.com/yangliulnn/gin-starter/httpd/utils"
+	"github.com/yangliulnn/gin-starter/httpd/utils/jwt"
+	. "github.com/yangliulnn/gin-starter/httpd/utils/log"
 )
 
 type AuthController struct{}
@@ -29,7 +29,7 @@ func (c *AuthController) Register(context *gin.Context) {
 
 	password, err := utils.NewPassword().Hash(request.Password)
 	if err != nil {
-		log.Println(err)
+		Log.Error(err)
 		response.InternalServerError(context)
 		return
 	}
@@ -39,7 +39,7 @@ func (c *AuthController) Register(context *gin.Context) {
 	}
 	err = user.Save()
 	if err != nil {
-		log.Println(err)
+		Log.Error(err)
 		response.InternalServerError(context)
 		return
 	}
@@ -65,7 +65,7 @@ func (c *AuthController) Login(context *gin.Context) {
 		return
 	}
 	if err != nil {
-		log.Println(err)
+		Log.Error(err)
 		response.InternalServerError(context)
 		return
 	}
@@ -78,7 +78,7 @@ func (c *AuthController) Login(context *gin.Context) {
 
 	token, err := jwt.Generate(user)
 	if err != nil {
-		log.Println(err)
+		Log.Error(err)
 		response.InternalServerError(context)
 		return
 	}

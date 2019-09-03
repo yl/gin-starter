@@ -18,7 +18,7 @@ func Generate(u *models.User) (string, error) {
 		Id:        uuid.New().String(),
 		IssuedAt:  time.Now().Unix(),
 		NotBefore: time.Now().Unix(),
-		Subject:   strconv.Itoa(u.ID) + "q",
+		Subject:   strconv.Itoa(u.ID),
 	}
 
 	return jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(key)
