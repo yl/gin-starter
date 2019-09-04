@@ -30,8 +30,7 @@ func (c *AuthController) Register(context *gin.Context) {
 	user := models.NewUser()
 	err = user.FirstBy("mobile", request.Mobile)
 	if err != nil && !gorm.IsRecordNotFoundError(err) {
-		Log.Error(err)
-		response.InternalServerError(context)
+		response.InternalServerError(context, err)
 		return
 	}
 	if user.ID > 0 {
@@ -42,15 +41,13 @@ func (c *AuthController) Register(context *gin.Context) {
 	user.Mobile = request.Mobile
 	user.Password, err = utils.NewPassword().Hash(request.Password)
 	if err != nil {
-		Log.Error(err)
-		response.InternalServerError(context)
+		response.InternalServerError(context, err)
 		return
 	}
 
 	err = user.Save()
 	if err != nil {
-		Log.Error(err)
-		response.InternalServerError(context)
+		response.InternalServerError(context, err)
 		return
 	}
 
@@ -75,8 +72,7 @@ func (c *AuthController) Login(context *gin.Context) {
 		return
 	}
 	if err != nil {
-		Log.Error(err)
-		response.InternalServerError(context)
+		response.InternalServerError(context, err)
 		return
 	}
 
@@ -88,8 +84,7 @@ func (c *AuthController) Login(context *gin.Context) {
 
 	token, err := jwt.Generate(user)
 	if err != nil {
-		Log.Error(err)
-		response.InternalServerError(context)
+		response.InternalServerError(context, err)
 		return
 	}
 

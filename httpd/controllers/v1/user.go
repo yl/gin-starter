@@ -31,8 +31,7 @@ func (c *UserController) Show(context *gin.Context) {
 
 	id, err := strconv.Atoi(context.Param("id"))
 	if err != nil {
-		Log.Error(err)
-		response.InternalServerError(context)
+		response.InternalServerError(context, err)
 		return
 	}
 
@@ -43,8 +42,7 @@ func (c *UserController) Show(context *gin.Context) {
 		return
 	}
 	if err != nil {
-		Log.Error(err)
-		response.InternalServerError(context)
+		response.InternalServerError(context, err)
 		return
 	}
 
