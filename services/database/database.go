@@ -2,7 +2,6 @@ package database
 
 import (
 	"fmt"
-
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -38,6 +37,10 @@ func Setup() {
 	if err != nil {
 		log.Log.Error(err)
 	}
+	if configs.App.Mode == "debug" {
+		DB.LogMode(true)
+	}
+	DB.SetLogger(&GormLogger{})
 }
 
 func Close() {

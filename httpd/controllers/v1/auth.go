@@ -27,16 +27,26 @@ func (c *AuthController) Register(context *gin.Context) {
 		return
 	}
 
-	password, err := utils.NewPassword().Hash(request.Password)
+	user := models.NewUser()
+	err = user.FirstBy("mobile", request.Mobile)
+	if err != nil && !gorm.IsRecordNotFoundError(err) {
+		Log.Error(err)
+		response.InternalServerError(context)
+		return
+	}
+	if user.ID > 0 {
+		response.Error(context, http.StatusBadRequest, "手机号已注册")
+		return
+	}
+
+	user.Mobile = request.Mobile
+	user.Password, err = utils.NewPassword().Hash(request.Password)
 	if err != nil {
 		Log.Error(err)
 		response.InternalServerError(context)
 		return
 	}
-	user := models.User{
-		Mobile:   request.Mobile,
-		Password: password,
-	}
+
 	err = user.Save()
 	if err != nil {
 		Log.Error(err)

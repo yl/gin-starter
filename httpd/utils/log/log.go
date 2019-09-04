@@ -17,5 +17,8 @@ func Setup() {
 	if err != nil {
 		Log.Info("Failed to log to file, using default stderr")
 	}
-	Log.Out = file
+	Log.SetOutput(file)
+	if configs.App.Mode == "debug" {
+		Log.SetLevel(logrus.TraceLevel)
+	}
 }

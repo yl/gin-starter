@@ -78,7 +78,7 @@ func (r *Response) Error(context *gin.Context, code int, message string) {
 	})
 }
 
-//NotFound 400
+//NotFound 404
 func (r *Response) NotFound(context *gin.Context) {
 	r.Error(context, http.StatusNotFound, http.StatusText(http.StatusNotFound))
 }
@@ -90,7 +90,7 @@ func (r *Response) UnprocessableEntity(context *gin.Context, err error) {
 	errs := err.(validator.ValidationErrors)
 	for _, e := range errs.Translate(trans) {
 		r.Error(context, http.StatusUnprocessableEntity, e)
-		return
+		break
 	}
 }
 
