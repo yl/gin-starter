@@ -8,10 +8,10 @@ github.com/gin-gonic/gin/binding
 github.com/gin-gonic/gin/internal/json
 github.com/gin-gonic/gin/render
 # github.com/go-playground/locales v0.12.1
-github.com/go-playground/locales/en
-github.com/go-playground/locales/zh
 github.com/go-playground/locales
 github.com/go-playground/locales/currency
+github.com/go-playground/locales/en
+github.com/go-playground/locales/zh
 # github.com/go-playground/universal-translator v0.16.0
 github.com/go-playground/universal-translator
 # github.com/go-redis/redis v6.15.2+incompatible
@@ -36,6 +36,8 @@ github.com/jinzhu/gorm/dialects/sqlite
 github.com/jinzhu/inflection
 # github.com/json-iterator/go v1.1.6
 github.com/json-iterator/go
+# github.com/konsorten/go-windows-terminal-sequences v1.0.1
+github.com/konsorten/go-windows-terminal-sequences
 # github.com/leodido/go-urn v1.1.0
 github.com/leodido/go-urn
 # github.com/mattn/go-isatty v0.0.7
@@ -46,6 +48,8 @@ github.com/mattn/go-sqlite3
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
 github.com/modern-go/reflect2
+# github.com/sirupsen/logrus v1.4.2
+github.com/sirupsen/logrus
 # github.com/ugorji/go v1.1.4
 github.com/ugorji/go/codec
 # golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586
