@@ -7,7 +7,6 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/yangliulnn/gin-starter/httpd/models"
 	"github.com/yangliulnn/gin-starter/httpd/responses"
-	. "github.com/yangliulnn/gin-starter/httpd/utils/log"
 	"github.com/yangliulnn/gin-starter/httpd/utils/paginate"
 	"github.com/yangliulnn/gin-starter/services/database"
 )

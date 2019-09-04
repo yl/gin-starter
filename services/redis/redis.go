@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/go-redis/redis"
+	log "github.com/sirupsen/logrus"
 	"github.com/yangliulnn/gin-starter/configs"
-	"github.com/yangliulnn/gin-starter/httpd/utils/log"
 )
 
 var Redis *redis.Client
@@ -21,6 +21,6 @@ func Setup() {
 
 	_, err := Redis.Ping().Result()
 	if err != nil {
-		log.Log.Error(err)
+		log.Fatalln(err)
 	}
 }

@@ -12,7 +12,6 @@ import (
 	"github.com/yangliulnn/gin-starter/httpd/responses"
 	"github.com/yangliulnn/gin-starter/httpd/utils"
 	"github.com/yangliulnn/gin-starter/httpd/utils/jwt"
-	. "github.com/yangliulnn/gin-starter/httpd/utils/log"
 )
 
 type AuthController struct{}

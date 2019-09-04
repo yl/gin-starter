@@ -9,7 +9,7 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/yangliulnn/gin-starter/httpd/utils/log"
+	log "github.com/sirupsen/logrus"
 )
 
 // LogWriter log writer interface
@@ -24,7 +24,7 @@ type GormLogger struct {
 
 // Print handles log events from Gorm for the custom logger.
 func (*GormLogger) Print(values ...interface{}) {
-	log.Log.Debug(logFormatter(values...)...)
+	log.Debug(logFormatter(values...)...)
 }
 
 var (

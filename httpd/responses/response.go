@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 	"github.com/yangliulnn/gin-starter/configs"
-	. "github.com/yangliulnn/gin-starter/httpd/utils/log"
 	"github.com/yangliulnn/gin-starter/httpd/utils/paginate"
 	"github.com/yangliulnn/gin-starter/httpd/validators"
 	"gopkg.in/go-playground/validator.v9"
@@ -98,7 +98,7 @@ func (r *Response) UnprocessableEntity(context *gin.Context, err error) {
 
 //InternalServerError 500
 func (r *Response) InternalServerError(context *gin.Context, err error) {
-	Log.Error(err)
+	log.Error(err)
 
 	var message string
 	if configs.App.Mode == "debug" {
